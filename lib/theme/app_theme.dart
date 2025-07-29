@@ -118,7 +118,7 @@ class AppTheme {
     ),
 
     // Card theme with adaptive elevation for hierarchy
-    CardTheme: CardThemeData(
+    cardTheme: CardThemeData(
       color: surfaceLight,
       elevation: 2.0, // 2-4dp range for balance cards
       shadowColor: shadowLight,
