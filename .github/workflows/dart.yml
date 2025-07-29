@@ -7,32 +7,51 @@ jobs:
   build-ios:
     name: 🎉 iOS Build
     runs-on: macos-latest
+
     steps:
-      - uses: actions/checkout@v3
+      - name: 🔄 Checkout code
+        uses: actions/checkout@v3
 
-      - uses: subosito/flutter-action@v2
+      - name: 🔧 Setup Flutter
+        uses: subosito/flutter-action@v2
         with:
-          channel: 'stable'
+          flutter-version: '3.22.1'  # 🔁 Replace with your actual Flutter version
           architecture: x64
-      - run: flutter pub get
-      
 
-      - run: pod repo update
+      - name: 🔄 Restore pub cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.pub-cache
+          key: ${{ runner.os }}-pub-cache-${{ hashFiles('**/pubspec.yaml') }}
+          restore-keys: ${{ runner.os }}-pub-cache-
+
+      - name: 🚀 Install dependencies
+        run: flutter pub get
+
+      - name: 🧪 Analyze code
+        run: flutter analyze
+
+      - name: 🧰 Update pod repo
+        run: pod repo update
         working-directory: ios
 
-      - run: flutter build ios --release --no-codesign
+      - name: 📦 Build iOS (no codesign)
+        run: flutter build ios --release --no-codesign
 
-      - run: mkdir Payload
+      - name: 📂 Create Payload directory
+        run: mkdir Payload
         working-directory: build/ios/iphoneos
 
-      - run: mv Runner.app/ Payload
+      - name: 📁 Move .app into Payload
+        run: mv Runner.app/ Payload
         working-directory: build/ios/iphoneos
 
-      - name: Zip output
+      - name: 📦 Zip IPA
         run: zip -qq -r -9 FlutterIpaExport.ipa Payload
         working-directory: build/ios/iphoneos
 
-      - name: Upload binaries to release
+      - name: 🚀 Upload release IPA
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
