@@ -72,6 +72,7 @@ class AppTheme {
 
   /// Light theme configuration
   static ThemeData lightTheme = ThemeData(
+      useMaterial3: true,
     brightness: Brightness.light,
     colorScheme: ColorScheme(
       brightness: Brightness.light,
@@ -118,7 +119,7 @@ class AppTheme {
     ),
 
     // Card theme with adaptive elevation for hierarchy
-    cardTheme: const CardThemeData(
+    cardTheme: CardTheme(
       color: surfaceLight,
       elevation: 2.0, // 2-4dp range for balance cards
       shadowColor: shadowLight,
@@ -339,6 +340,7 @@ class AppTheme {
 
   /// Dark theme configuration
   static ThemeData darkTheme = ThemeData(
+      useMaterial3: true,
     brightness: Brightness.dark,
     colorScheme: ColorScheme(
       brightness: Brightness.dark,
@@ -385,7 +387,7 @@ class AppTheme {
     ),
 
     // Card theme for dark mode
-    cardTheme: const CardThemeData(
+    cardTheme: CardTheme(
       color: surfaceDark,
       elevation: 2.0,
       shadowColor: shadowDark,
