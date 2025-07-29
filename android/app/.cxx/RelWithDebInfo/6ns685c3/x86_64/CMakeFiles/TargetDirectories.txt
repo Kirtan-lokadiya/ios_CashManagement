@@ -1,0 +1,2 @@
+/home/kirtan/Downloads/cashflow_manager/android/app/.cxx/RelWithDebInfo/6ns685c3/x86_64/CMakeFiles/edit_cache.dir
+/home/kirtan/Downloads/cashflow_manager/android/app/.cxx/RelWithDebInfo/6ns685c3/x86_64/CMakeFiles/rebuild_cache.dir

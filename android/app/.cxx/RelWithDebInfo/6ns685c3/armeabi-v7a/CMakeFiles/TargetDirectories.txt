@@ -1,0 +1,2 @@
+/home/kirtan/Downloads/cashflow_manager/android/app/.cxx/RelWithDebInfo/6ns685c3/armeabi-v7a/CMakeFiles/edit_cache.dir
+/home/kirtan/Downloads/cashflow_manager/android/app/.cxx/RelWithDebInfo/6ns685c3/armeabi-v7a/CMakeFiles/rebuild_cache.dir
