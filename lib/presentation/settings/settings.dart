@@ -183,7 +183,7 @@ class _SettingsState extends State<Settings> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 6, vsync: this, initialIndex: 5);
+    _tabController = TabController(length: 1, vsync: this);
   }
 
   @override
@@ -485,116 +485,42 @@ class _SettingsState extends State<Settings> with TickerProviderStateMixin {
         backgroundColor: AppTheme.lightTheme.appBarTheme.backgroundColor,
         foregroundColor: AppTheme.lightTheme.appBarTheme.foregroundColor,
         elevation: AppTheme.lightTheme.appBarTheme.elevation,
-        bottom: TabBar(
-          controller: _tabController,
-          isScrollable: true,
-          tabs: [
-            Tab(
-              icon: CustomIconWidget(
-                iconName: 'dashboard',
-                color: AppTheme.lightTheme.colorScheme.onSurfaceVariant,
-                size: 20,
-              ),
-              text: 'Dashboard',
-            ),
-            Tab(
-              icon: CustomIconWidget(
-                iconName: 'add',
-                color: AppTheme.lightTheme.colorScheme.onSurfaceVariant,
-                size: 20,
-              ),
-              text: 'Add Income',
-            ),
-            Tab(
-              icon: CustomIconWidget(
-                iconName: 'payment',
-                color: AppTheme.lightTheme.colorScheme.onSurfaceVariant,
-                size: 20,
-              ),
-              text: 'Payment',
-            ),
-            Tab(
-              icon: CustomIconWidget(
-                iconName: 'history',
-                color: AppTheme.lightTheme.colorScheme.onSurfaceVariant,
-                size: 20,
-              ),
-              text: 'History',
-            ),
-            Tab(
-              icon: CustomIconWidget(
-                iconName: 'settings',
-                color: AppTheme.lightTheme.colorScheme.primary,
-                size: 20,
-              ),
-              text: 'Settings',
-            ),
-          ],
-          onTap: (index) {
-            switch (index) {
-              case 0:
-                Navigator.pushReplacementNamed(context, '/dashboard');
-                break;
-              case 1:
-                Navigator.pushReplacementNamed(context, '/add-cash-income');
-                break;
-              case 2:
-                Navigator.pushReplacementNamed(context, '/record-payment');
-                break;
-              case 3:
-                Navigator.pushReplacementNamed(context, '/transaction-history');
-                break;
-              case 4:
-                // Already on settings
-                break;
-            }
-          },
-        ),
       ),
-      body: TabBarView(
-        controller: _tabController,
-        children: [
-          Container(), // Dashboard placeholder
-          Container(), // Add Income placeholder
-          Container(), // Payment placeholder
-          Container(), // History placeholder
-          SingleChildScrollView(
-            child: Column(
-              children: [
-                SizedBox(height: 2.h),
-                ..._settingsData.map((section) => Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 4.w, vertical: 1.h),
-                          child: Text(
-                            section['section'],
-                            style: AppTheme.lightTheme.textTheme.titleMedium
-                                ?.copyWith(
-                              color: AppTheme.lightTheme.colorScheme.primary,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(height: 2.h),
+            ..._settingsData.map((section) => Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 4.w, vertical: 1.h),
+                      child: Text(
+                        section['section'],
+                        style: AppTheme.lightTheme.textTheme.titleMedium
+                            ?.copyWith(
+                          color: AppTheme.lightTheme.colorScheme.primary,
+                          fontWeight: FontWeight.w600,
                         ),
-                        Card(
-                          margin: EdgeInsets.symmetric(
-                              horizontal: 4.w, vertical: 0.5.h),
-                          child: Column(
-                            children: [
-                              ...(section['items'] as List)
-                                  .map((item) => _buildSettingItem(item)),
-                            ],
-                          ),
-                        ),
-                        SizedBox(height: 1.h),
-                      ],
-                    )),
-                SizedBox(height: 4.h),
-              ],
-            ),
-          ),
-        ],
+                      ),
+                    ),
+                    Card(
+                      margin: EdgeInsets.symmetric(
+                          horizontal: 4.w, vertical: 0.5.h),
+                      child: Column(
+                        children: [
+                          ...(section['items'] as List)
+                              .map((item) => _buildSettingItem(item)),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 1.h),
+                  ],
+                )),
+            SizedBox(height: 4.h),
+          ],
+        ),
       ),
     );
   }

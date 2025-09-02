@@ -5,6 +5,7 @@ import '../presentation/transaction_history/transaction_history.dart';
 import '../presentation/add_cash_income/add_cash_income.dart';
 import '../presentation/settings/settings.dart';
 import '../presentation/record_payment/record_payment.dart';
+import '../presentation/reminders/reminders_screen.dart';
 
 class AppRoutes {
   // TODO: Add your routes here
@@ -15,6 +16,7 @@ class AppRoutes {
   static const String addCashIncome = '/add-cash-income';
   static const String settings = '/settings';
   static const String recordPayment = '/record-payment';
+  static const String reminders = '/reminders';
 
   static Map<String, WidgetBuilder> routes = {
     initial: (context) => const SplashScreen(),
@@ -24,6 +26,7 @@ class AppRoutes {
     addCashIncome: (context) => const AddCashIncome(),
     settings: (context) => const Settings(),
     recordPayment: (context) => const RecordPayment(),
+    reminders: (context) => const RemindersScreen(),
     // TODO: Add your other routes here
   };
 }

@@ -7,3 +7,4 @@ export 'transaction_model.dart';
 export 'contact_model.dart';
 export 'suggestion_model.dart';
 export 'firm_model.dart';
+export 'reminder_model.dart';

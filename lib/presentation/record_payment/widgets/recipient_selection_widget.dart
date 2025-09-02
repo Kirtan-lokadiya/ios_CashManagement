@@ -58,15 +58,27 @@ class _RecipientSelectionWidgetState extends State<RecipientSelectionWidget> {
     try {
       final contacts = await flutter_contacts.FlutterContacts.getContacts(
         withProperties: true,
-        withPhoto: true,
+        withPhoto: false,
       );
 
+      print('Loaded ${contacts.length} contacts');
+      
       setState(() {
         _allContacts = contacts;
         _filteredContacts = contacts;
         _loadingContacts = false;
       });
+      
+      if (mounted) {
+        showModalBottomSheet(
+          context: context,
+          isScrollControlled: true,
+          backgroundColor: Colors.transparent,
+          builder: (context) => _buildContactPickerSheet(),
+        );
+      }
     } catch (e) {
+      print('Contact loading error: $e');
       setState(() {
         _loadingContacts = false;
       });
@@ -163,14 +175,27 @@ class _RecipientSelectionWidgetState extends State<RecipientSelectionWidget> {
           Expanded(
             child: _loadingContacts
                 ? Center(child: CircularProgressIndicator())
-                : ListView.builder(
-              padding: EdgeInsets.symmetric(horizontal: 4.w),
-                    itemCount: _filteredContacts.length,
-              itemBuilder: (context, index) {
-                      final contact = _filteredContacts[index];
-                return _buildContactTile(contact);
-              },
-            ),
+                : _filteredContacts.isEmpty
+                    ? Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.contacts, size: 50, color: Colors.grey),
+                            SizedBox(height: 2.h),
+                            Text('No contacts found'),
+                            SizedBox(height: 1.h),
+                            Text('Make sure you have contacts saved on your device'),
+                          ],
+                        ),
+                      )
+                    : ListView.builder(
+                        padding: EdgeInsets.symmetric(horizontal: 4.w),
+                        itemCount: _filteredContacts.length,
+                        itemBuilder: (context, index) {
+                          final contact = _filteredContacts[index];
+                          return _buildContactTile(contact);
+                        },
+                      ),
           ),
         ],
       ),
@@ -229,7 +254,10 @@ class _RecipientSelectionWidgetState extends State<RecipientSelectionWidget> {
           children: [
             Expanded(
               child: OutlinedButton.icon(
-                onPressed: _showContactPicker,
+                onPressed: () {
+                  widget.onContactSelected('', '');
+                  _showContactPicker();
+                },
                 icon: CustomIconWidget(
                   iconName: 'contacts',
                   color: AppTheme.lightTheme.colorScheme.primary,

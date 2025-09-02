@@ -48,7 +48,7 @@ class _DashboardState extends State<Dashboard> with TickerProviderStateMixin {
       "description": "Payment due alerts",
       "icon": "notifications",
       "color": AppTheme.getWarningColor(true),
-      "route": "/settings"
+      "route": "/reminders"
     },
     {
       "title": "View Pending",
@@ -198,7 +198,7 @@ class _DashboardState extends State<Dashboard> with TickerProviderStateMixin {
                     'Set payment alert',
                     'notifications',
                     AppTheme.getWarningColor(true),
-                    () => Navigator.pushNamed(context, '/settings'),
+                    () => Navigator.pushNamed(context, '/reminders'),
                   ),
                 ],
               ),
@@ -297,7 +297,7 @@ class _DashboardState extends State<Dashboard> with TickerProviderStateMixin {
                       Navigator.pushNamed(context, '/transaction-history');
                       break;
                     case 2:
-                      Navigator.pushNamed(context, '/settings');
+                      Navigator.pushNamed(context, '/reminders');
                       break;
                     case 3:
                       Navigator.pushNamed(context, '/settings');

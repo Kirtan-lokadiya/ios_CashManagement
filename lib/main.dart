@@ -19,12 +19,14 @@ void main() async {
   Hive.registerAdapter(ContactAdapter());
   Hive.registerAdapter(SuggestionAdapter());
   Hive.registerAdapter(FirmAdapter());
+  Hive.registerAdapter(ReminderAdapter());
 
   // Open boxes
   await Hive.openBox<Transaction>('transactions');
   await Hive.openBox<Contact>('contacts');
   await Hive.openBox<Suggestion>('suggestions');
   await Hive.openBox<Firm>('firms');
+  await Hive.openBox<Reminder>('reminders');
 
   // 🚨 CRITICAL: Custom error handling - DO NOT REMOVE
   ErrorWidget.builder = (FlutterErrorDetails details) {
